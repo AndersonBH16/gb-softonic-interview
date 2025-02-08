@@ -19,7 +19,7 @@ class AppController extends Controller
     {
         try {
             $appInfo = $this->appService->getAppInfo($appId);
-            return response()->json($appInfo, 200, [], JSON_PRETTY_PRINT);
+            return response()->json($appInfo, 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404, [], JSON_PRETTY_PRINT);
         }
