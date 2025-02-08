@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\AppInfoService;
+use App\Application\Services\AppService;
 use Illuminate\Console\Command;
 
 class GetAppInfo extends Command
@@ -12,7 +12,7 @@ class GetAppInfo extends Command
      *
      * @var string
      */
-    protected $signature = 'app:info {appId}';
+    protected $signature = 'app:get-info {appId}';
 
     /**
      * The console command description.
@@ -20,27 +20,24 @@ class GetAppInfo extends Command
      * @var string
      */
     protected $description = 'Get app information by id';
-    protected $appInfoService;
 
-    public function __construct(AppInfoService $appInfoService)
+    private AppService $appService;
+
+    public function __construct(AppService $appService)
     {
         parent::__construct();
-        $this->appInfoService = $appInfoService;
+        $this->appService = $appService;
     }
 
-    /**
-     * Execute the console command.
-     */
     public function handle(): void
     {
         $appId = $this->argument('appId');
-        $appInfo = $this->appInfoService->getAppInfoById($appId);
 
-        if (empty($appInfo)) {
-            $this->error('App not found!');
-            return;
+        try {
+            $appInfo = $this->appService->getAppInfo($appId);
+            $this->info(json_encode($appInfo, JSON_PRETTY_PRINT));
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
         }
-
-        $this->info(json_encode($appInfo, JSON_PRETTY_PRINT));
     }
 }
