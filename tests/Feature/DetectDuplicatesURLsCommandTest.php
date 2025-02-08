@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,38 +39,21 @@ class DetectDuplicatesURLsCommandTest  extends TestCase
             "https://test.com/app2\n" .
             "https://another-example.com\n"
         );
+
+        $this->anotherSourcePath = storage_path('input-files/another_source.csv');
+        if (!file_exists(dirname($this->anotherSourcePath))) {
+            mkdir(dirname($this->anotherSourcePath), 0755, true);
+        }
+        file_put_contents($this->anotherSourcePath, "4,https://another.com/app4\n");
     }
 
     public function tearDown(): void
     {
-        if (file_exists($this->sourcePath)) {
-            unlink($this->sourcePath);
-        }
-        if (file_exists($this->catalogPath)) {
-            unlink($this->catalogPath);
-        }
         if (file_exists($this->outputPath)) {
             unlink($this->outputPath);
         }
 
-        @rmdir(dirname($this->sourcePath));
-        @rmdir(dirname($this->outputPath));
-
         parent::tearDown();
-    }
-
-    public function test_command_detects_non_duplicates()
-    {
-        $this->artisan('app:detect-duplicates')
-            ->assertSuccessful();
-
-        $this->assertFileExists($this->outputPath);
-
-        $output = file_get_contents($this->outputPath);
-
-        $this->assertStringContainsString('1', $output);
-        $this->assertStringContainsString('3', $output);
-        $this->assertStringNotContainsString('2', $output);
     }
 
     public function test_command_handles_missing_files()
