@@ -15,8 +15,24 @@
    git clone https://github.com/AndersonBH16/gb-softonic-interview.git
    cd https://github.com/AndersonBH16/gb-softonic-interview.git
    ```
-2. Using dockers (Optional)
-    - Create and run containers:    
+
+2. Configure environment variables.
+   ```sh
+   cp .env.example .env
+   ```
+    - Set database connection details in `.env`
+
+    ```.env
+    DB_CONNECTION=mysql
+    DB_HOST=db
+    DB_PORT=3306
+    DB_DATABASE=test-gb-softonic
+    DB_USERNAME=testuser
+    DB_PASSWORD=T3z6PoW9
+    ```
+
+3. Using dockers (Optional)
+    - Create and run containers: (it may take some minutes to configure all environment)
          ```sh
          docker-compose up -d --build
          ```
@@ -28,46 +44,37 @@
          ```sh
          docker exec -it app-interview bash
          ```
-   
+
     - if you need remove the containers created, run: (Optional)
        ```sh
         docker-compose down
       ```
-      
-You can run the next steps also within dockers or local environment
 
-3. Install composer dependencies:
+    You can run the next steps also within dockers or local environment
+
+4. Install composer dependencies:
    ```sh
    composer install
    ```
-3. Configure environment variables.
-   ```sh
-   cp .env.example .env
-   ```
-    - Set database connection details in `.env`
-   
 
-4. Create laravel key
+5. Create laravel key
     ```sh
    php artisan key:generate
    ```
-   
 
-5. Run database migrations:
+6. Run database migrations:
    ```sh
    php artisan migrate
    ```
-   
-
-5. Start the application: (if you don't use dockers)
+  
+7. Start the application: (if you don't use dockers)
    ```sh
    php artisan serve
    ```
-6. If you are using dockers, you must access in you browser:
+8. If you are using dockers, you must access in you browser:
    ```sh
    localhost:8009
    ```
-
 
 ## 2. Execution Artisan Commands & Testing
 
