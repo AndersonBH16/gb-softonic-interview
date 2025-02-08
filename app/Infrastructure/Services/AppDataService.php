@@ -8,13 +8,13 @@ class AppDataService
 {
     public function getAppData(string $appId): ?array
     {
-        $apps = json_decode(File::get(storage_path('app/app.json')), true);
+        $apps = json_decode(File::get(storage_path('external-files/app.json')), true);
         return collect($apps)->firstWhere('id', $appId);
     }
 
     public function getDeveloperData(string $developerId): ?array
     {
-        $developers = json_decode(File::get(storage_path('app/developer.json')), true);
+        $developers = json_decode(File::get(storage_path('external-files/developer.json')), true);
         return collect($developers)->firstWhere('id', $developerId);
     }
 }
