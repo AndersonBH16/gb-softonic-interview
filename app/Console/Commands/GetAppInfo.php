@@ -35,7 +35,7 @@ class GetAppInfo extends Command
 
         try {
             $appInfo = $this->appService->getAppInfo($appId);
-            $this->info(json_encode($appInfo, JSON_PRETTY_PRINT));
+            $this->info(json_encode($appInfo, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
