@@ -1,10 +1,13 @@
-# Exercise 2: Duplicate Detection Summary
+# Exercise 2: Laravel Artisan Command Detect Duplicates
 
-## How to Run
+## How to Run code/tests
+**Important:**
+
+This exercise was developed in the same project as exercise 1. So you can follow the same steps in `SUMMARY_EX1.md`
 
 1. Execute the command:
 ```bash
-php artisan app:detect-duplicates {source_file} {catalog_file} {output_file}
+php artisan app:detect-duplicates
 ```
 
 2. Run tests:
@@ -12,34 +15,32 @@ php artisan app:detect-duplicates {source_file} {catalog_file} {output_file}
 php artisan test --filter=DetectDuplicatesCommandTest
 ```
 
-## Why Bash?
+## Why I choose Bash?
 
-I chose Bash for several reasons:
-1. **Performance**: Bash is excellent for text processing and file operations, with built-in commands optimized for these tasks
+1. **Performance**: Bash is perfect for file operations, with built-in commands optimized for these tasks
 2. **System Resources**: Bash scripts have minimal overhead and don't require additional runtime environments
-3. **Text Processing Tools**: Built-in tools like `awk`, `sed`, and `tr` are highly efficient for string manipulation
-4. **Process Management**: Easy integration with the system and excellent process handling
+3. Because some instructions as `awk`, `sed`, and `tr` are highly efficient for string manipulation
+5. And also I had some knowledge on bash scripts 😁
 
-## Performance/Scalability Improvements
+## What would you do to improve the performance/scalability if you would not have any constraints?
 
-Without constraints, I would consider:
+I would consider:
 
-1. **Parallel Processing**: Process the files in chunks using parallel execution
-2. **Database Integration**: For very large datasets, using a database with proper indexing
-3. **Memory-Mapped Files**: For better performance with large files
-4. **Optimized Data Structures**: Using bloom filters for initial filtering
-5. **Caching**: Implementing a caching system for frequently accessed URLs
-6. **Distributed Processing**: Using distributed computing frameworks for massive datasets
+1. Parallel Processing with multiple files.
+2. Database Integration adding indexing.
+3. Implementing a caching system for frequently accessed URLs.
+4. Integrate with another processing services as scraping with curl. 
+4. Using distributed computing, yey maybe.
 
-## What I Would Do Differently
+## What would you have done differently if you had had more time
 
-With more time, I would:
+I would:
 
-1. Add more sophisticated URL normalization
-2. Implement better error handling and logging
-3. Add progress reporting for large files
-4. Implement more unit tests and edge cases
-5. Add configuration options for similarity algorithm parameters
-6. Optimize the similarity calculation algorithm
-7. Add validation for file formats and content
-8. Implement batch processing for better memory management
+1. Create UI/UX for improving users experience.
+2. Add more sophisticated URL normalization.
+3. Implement better error handling and logging.
+4. Add progress reporting for large files, it allows us checking the advance.
+5. Implement more unit tests.
+6. Maybe Optimize the similarity calculation algorithm.
+7. We have the input files hardcoded located on: `storage/input-files` and the output file located on: `storage/output-files`,
+   but you could add external files dynamically
